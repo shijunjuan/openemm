@@ -38,6 +38,7 @@ import org.agnitas.dao.CompanyDao;
 import org.agnitas.util.AgnUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -68,6 +69,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper());
 		} catch (DataAccessException e) {
 			// No User found
+            e.printStackTrace();
 			return null;
 		}
 
@@ -88,9 +90,15 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, preferred_list_size, default_import_profile_id " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash,  default_import_profile_id " +
                 "from admin_tbl where username = ? and pwd_hash = ?";
+        /*String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, preferred_list_size, default_import_profile_id " +
+                "from admin_tbl where username = ? and pwd_hash = ?";*/
          try {
+             logger.warn(query);
+             logger.warn(name);
+             logger.warn(new String(pwdHash));
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper(), new Object[] {name, pwdHash});
 		} catch (DataAccessException e) {
 			// No User found
@@ -239,7 +247,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 			admin.setAdminTimezone(resultSet.getString("admin_timezone"));
 			admin.setLayoutID(resultSet.getInt("layout_id"));
 			admin.setDefaultImportProfileID(resultSet.getInt("default_import_profile_id"));
-			admin.setPreferredListSize(resultSet.getInt("preferred_list_size"));
+			//admin.setPreferredListSize(resultSet.getInt("preferred_list_size"));
 
 			// Read additional data
 

@@ -1184,7 +1184,7 @@ public class Data {
                 throw new Exception ("Loglevel must be a known string or a numerical value, not " + val);
             }
         }
-        mailDir = cfg.cget ("MAILDIR", mailDir);
+        mailDir = cfg.cgetPath ("MAILDIR", mailDir);
         defaultEncoding = cfg.cget ("DEFAULT_ENCODING", defaultEncoding);
         defaultCharset = cfg.cget ("DEFAULT_CHARSET", defaultCharset);
         dbDriver = cfg.cget ("DB_DRIVER", dbDriver);
@@ -1194,8 +1194,8 @@ public class Data {
         dbPoolsize = cfg.cget ("DB_POOLSIZE", dbPoolsize);
         dbPoolgrow = cfg.cget ("DB_POOLGROW", dbPoolgrow);
         blockSize = cfg.cget ("BLOCKSIZE", blockSize);
-        metaDir = cfg.cget ("METADIR", metaDir);
-        xmlBack = cfg.cget ("XMLBACK", xmlBack);
+        metaDir = cfg.cgetPath ("METADIR", metaDir);
+        xmlBack = cfg.cgetPath ("XMLBACK", xmlBack);
         xmlValidate = cfg.cget ("XMLVALIDATE", xmlValidate);
         if (((sampleEmails = cfg.cget ("SAMPLE_EMAILS", sampleEmails)) != null) &&
             ((sampleEmails.length () == 0) || sampleEmails.equals ("-"))) {
@@ -1214,8 +1214,8 @@ public class Data {
         }
         mailer = cfg.cget ("MAILER", mailer);
         mailLogNumber = cfg.cget ("MAIL_LOG_NUMBER", mailLogNumber);
-        accLogfile = cfg.cget ("ACCOUNT_LOGFILE", accLogfile);
-        bncLogfile = cfg.cget ("BOUNCE_LOGFILE", bncLogfile);
+        accLogfile = cfg.cgetPath ("ACCOUNT_LOGFILE", accLogfile);
+        bncLogfile = cfg.cgetPath ("BOUNCE_LOGFILE", bncLogfile);
     }
 
     /*

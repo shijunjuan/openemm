@@ -547,7 +547,10 @@ public class MailWriterMeta extends MailWriter {
             out = new FileOutputStream (pathname);
         } else {
             pathname = fname + ".xml.gz";
-            out = new GZIPOutputStream (new FileOutputStream (pathname));
+            //if(new File(pathname).exists())
+                out = new GZIPOutputStream (new FileOutputStream (pathname));
+            /*else
+                out = new GZIPOutputStream (new FileOutputStream (MailWriterMeta.class.getResource("/").getPath()+"../../../"+pathname));*/
         }
         writer = new XMLWriter (out);
         writer.start ();
@@ -1069,5 +1072,10 @@ public class MailWriterMeta extends MailWriter {
             if (icustomer_id != 0)
                 billingCounter.sadd (mailtype);
         writeMailDone ();
+    }
+
+    public static void main(String[] args){
+        String path = MailWriterMeta.class.getResource("/").getPath()+"../../../var";
+        System.out.println(path);
     }
 }

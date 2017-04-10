@@ -95,8 +95,9 @@ restart() {
 	start
 }
 
-test_user
-$HOME/bin/scripts/config.sh
+#test_user
+#$HOME/bin/scripts/config.sh
+ /cygdrive/c/Git/openemm/openemm-backend/src/main/scripts/lib/config.sh
 cd $HOME
 
 export CATALINA_BASE CATALINA_HOME CATALINA_TMPDIR JAVA_HOME JAVA_OPTS LANG

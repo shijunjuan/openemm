@@ -332,6 +332,7 @@ public class LogonAction extends StrutsActionBase {
 		HttpSession session=req.getSession();
 		AdminDao adminDao=(AdminDao) getBean("AdminDao");
 		EmmLayoutBaseDao layoutDao=(EmmLayoutBaseDao) getBean("EmmLayoutBaseDao");
+		if(aForm!=null)logger.warn("Login:"+aForm.getUsername()+":"+aForm.getPassword());
 		Admin aAdmin=adminDao.getAdminByLogin(aForm.getUsername(), aForm.getPassword());
 		LoginTrackDao loginTrackDao = (LoginTrackDao) getBean("LoginTrackDao");
         DocMappingDao docMappingDao = (DocMappingDao) getBean("DocMappingDao");

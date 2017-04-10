@@ -66,10 +66,10 @@
 							<target name="compile-backend" unless="native.build.stamp">
 								<echo message="*** Building OpenEMM Backend - Native compilation ***" />
 								<!-- Configuration properties, shortcuts from maven property names -->
-								<property name="target" value="${project.build.directory}/build" />
-								<property name="native.src" value="${project.build.directory}/../src/main/native" />
-								<property name="generated.src" value="${project.build.directory}/generated-sources" />
-								<property name="resources" value="${project.build.directory}/../src/main/resources" />
+								<property name="target" value="${project.build.directory}\build" />
+								<property name="native.src" value="${project.build.directory}\..\src\main\native" />
+								<property name="generated.src" value="${project.build.directory}\generated-sources" />
+								<property name="resources" value="${project.build.directory}\..\src/main/resources" />
 								<property name="scripts" value="${project.build.scriptSourceDirectory}" />
 
 								<!-- Prepares bundled source for native compilation -->
@@ -90,19 +90,21 @@
 								<chmod file="${generated.src}/make_backend.sh" perm="a+x" verbose="true" />
 
 								<!-- Compile all backend modules -->
-								<exec executable="./make_backend.sh" dir="${generated.src}" />
+								<exec executable="bash" dir="${generated.src}" >
+								<arg line="./make_backend.sh"/>
+								</exec>
 
 								<!-- Move resulting files to target folder -->
-								<copy todir="${target}/bin">
+								<copy todir="${target}\bin">
 									<fileset  dir="${scripts}/control" />
-									<filelist dir="${generated.src}/src/c/bav" files="bav"/>
-									<filelist dir="${generated.src}/src/c/tools" files="qctrl,smctrl,updater"/>
-									<filelist dir="${generated.src}/src/c/xmlback" files="xmlback"/>
+									<!--<filelist dir="${generated.src}/src/c/bav" files="bav"/>-->
+									<!--<filelist dir="${generated.src}/src/c/tools" files="qctrl,smctrl,updater"/>-->
+									<!--<filelist dir="${generated.src}/src/c/xmlback" files="xmlback"/>-->
 									<fileset  dir="${scripts}/tomcat/bin" />
 								</copy>
 								<copy todir="${target}/bin/scripts">
 									<fileset dir="${scripts}/process" />
-									<filelist dir="${generated.src}/src/c/bav" files="bavwrap" />
+									<!--<filelist dir="${generated.src}/src/c/bav" files="bavwrap" />-->
 									<filelist dir="${scripts}/lib" files="agn.py,aps.py,config.sh" />
 								</copy>
 								<move todir="${target}/conf/semu">
@@ -121,9 +123,9 @@
 								<copy todir="${target}/conf">
 									<fileset dir="${scripts}/tomcat/conf"/>
 								</copy>
-								<copy todir="${target}/conf/bav">
+								<!--<copy todir="${target}/conf/bav">
 									<fileset dir="${scripts}/data" />
-								</copy>
+								</copy>-->
 								<copy todir="${target}/conf/upgrade">
 									<fileset dir="${scripts}/process/upgrade" />
 								</copy>

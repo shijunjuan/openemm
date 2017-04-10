@@ -306,6 +306,17 @@ public class Config {
 
         return temp == null ? dflt : temp;
     }
+    public String cgetPath (String key, String dflt) {
+        String  temp = cget (key);
+        if(temp!=null){
+            if(!new File(temp).exists()){
+                temp = Config.class.getResource("/").getPath()+"../../../"+temp;
+                if(temp.startsWith("/"))
+                    temp = temp.substring(1);
+            }
+        }
+        return temp == null ? dflt : temp;
+    }
     public int cget (String key, int dflt) {
         String  temp = cget (key);
 
